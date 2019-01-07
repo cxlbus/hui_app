@@ -1,0 +1,87 @@
+{
+  "index.html": {
+    "resources": [
+      "page/sub_home.html",
+      "page/sub_my.html"
+    ],
+    "refer": [
+      "page/sub_home.html",
+      "page/sub_forum.html",
+      "page/sub_my.html",
+      "page/sub_news.html"
+    ]
+  },
+  "page/sub_news.html": {
+    "refer": [
+      "page/order_info.html",
+      "page/order_on.html",
+      "page/order_oc.html",
+      "page/order_om.html",
+      "page/order_oh.html"
+    ],
+    "resources": [
+      "page/order_oc.html"
+    ]
+  },
+  "page/order_oc.html": {
+    "refer": [
+      "page/order_info.html",
+      "login.html"
+    ]
+  },
+  "page/order_oh.html": {
+    "refer": [
+      "page/order_info.html"
+    ]
+  },
+  "page/order_on.html": {
+    "refer": [
+      "page/order_info.html"
+    ]
+  },
+  "page/order_om.html": {
+    "refer": [
+      "page/order_info.html"
+    ]
+  },
+  "page/sub_forum.html": {
+    "refer": [
+      "page/get_user.html",
+      "page/add_user.html"
+    ]
+  },
+  "login.html": {
+    "resources": [
+      "page/sub_home.html"
+    ],
+    "refer": [
+      "page/sub_forum.html",
+      "page/sub_home.html",
+      "page/sub_my.html",
+      "page/sub_news.html",
+      "index.html",
+      "page/modify_pwd.html"
+    ]
+  },
+  "page/sub_my.html": {
+    "refer": [
+      "login.html",
+      "page/camare.html",
+      "page/application.html",
+      "page/huitouchpwd.html"
+    ]
+  },
+  "page/sub_home.html": {
+    "refer": [
+      "page/add_order.html"
+    ],
+    "resources": [
+      "img/list/ýo.jpg"
+    ]
+  },
+  "page/modify_pwd.html": {
+    "refer": [
+      "page/modify_pwd.html"
+    ]
+  }
+}

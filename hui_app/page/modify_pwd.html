@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>HUI</title>
+		<link type="text/css" rel="stylesheet" href="../libs/hui_ku/css/hui.css" />
+		<link rel="stylesheet" href="../libs/intlTelInput/css/intlTelInput.css">
+		<style type="text/css">
+			#self_img {
+				width: 166px;
+				height: 180px;
+				margin: 0 auto;
+				margin-top: 66px;
+			}
+			
+			#self_img img {
+				width: 100%;
+				height: 100%;
+				text-align: center;
+			}
+			
+			#user_info {
+				margin-top: 30px;
+			}
+			
+			.self_font_cu {
+				font-weight: bold;
+				padding-left: 20%;
+			}
+			
+			#self_button {
+				margin-top: 5px;
+				height: 45px;
+				width: 100%;
+				line-height: 45px;
+			}
+			
+			#self_button button {
+				height: 100%;
+				width: 100%;
+			}
+			
+			#self_textarea {
+				margin-top: 25px;
+				height: 45px;
+			}
+			
+			#self_textarea input {
+				padding-left: 7px;
+				height: 100%;
+			}
+			
+			.hui-form-items-title {
+				width: 35%;
+			}
+			
+			#dianji_huoqu {
+				width: 80%;
+				height: 30px;
+				line-height: 30px;
+				font-size: 15px;
+				border-radius: 20px;
+				color: pink;
+				text-align: center;
+				background: lightyellow;
+			}
+			
+			#dianji_huoqu1 {
+				width: 80%;
+				height: 30px;
+				line-height: 30px;
+				font-size: 15px;
+				border-radius: 20px;
+				color: pink;
+				text-align: center;
+				background: lightyellow;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="hui-header">
+			<div id="hui-back"></div>
+			<h1>修改密码</h1>
+		</header>
+		<div class="hui-wrap">
+			<form style="padding:28px 10px;" class="hui-form" id="form1">
+				<div class="hui-form-items">
+					<div class="hui-form-items-title">手机号归属地</div>
+					<input id="phone" type="tel" class="hui-input">
+				</div>
+
+				<div class="hui-form-items">
+					<div class="hui-form-items-title">手机号码</div>
+					<input type="number" id='phonenum' class="hui-input" checkType="string" checkData="1,20" checkMsg="填写有效的手机号" placeholder="如：1889088..." name="phone" />
+				</div>
+				<div class="hui-form-items">
+					<div class="hui-form-items-title">您的称呼</div>
+					<input type="text" class="hui-input hui-input-clear" checkType="string" checkData="1,20" checkMsg="填写有效的用户名" name="account" placeholder="如：张三" />
+				</div>
+				<div class="hui-form-items">
+					<div class="hui-form-items-title">登录密码</div>
+					<input type="password" name="pwd" class="hui-input hui-pwd-eye" checkType="string" checkData="1,20" checkMsg="填写有效的密码" placeholder="登录密码" />
+				</div>
+
+				<div class="hui-form-items">
+					<div class="hui-form-items-title">验证码</div>
+					<input type="number" class="hui-input" name="code" checkType="string" checkData="1,20" checkMsg="填写有效的验证码" placeholder="验证码" />
+					<div id="dianji_huoqu">
+						获取验证码
+					</div>
+					<div id="dianji_huoqu1" style="display: none;">
+						60
+					</div>
+
+				</div>
+
+				<div class="hui-form-items">
+					<div class="hui-form-items-title">备注</div>
+					<div class="hui-form-textarea">
+						<textarea placeholder="个人信息..." name="note"></textarea>
+					</div>
+				</div>
+				<div style="padding:15px 8px;">
+					<button type="button" class="hui-button hui-primary hui-fr" id="submitBtn">提交数据</button>
+				</div>
+			</form>
+		</div>
+
+		<script type="text/javascript" src="../libs/hui_ku/js/hui.js"></script>
+		<script type="text/javascript" src="../libs/hui_ku/js/hui-form.js"></script>
+		<script type="text/javascript" src="../libs/jquery/jquery-2.1.0.js"></script>
+		<script src="../libs/intlTelInput/js/intlTelInput.js"></script>
+		<script type="text/javascript" src="../libs/crypto/crypto-js.js"></script>
+		<script type="text/javascript" src="../libs/crypto/rc4.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script src="../libs/crypto/md5.min.js"></script>
+		<script type="text/javascript" src="../js/self_comment.js"></script>
+
+		<script type="text/javascript">
+			//禁用返回键
+			hui.ready(
+				function() {
+					hui.plusReady(function() {
+						/*清空本地数据start*/
+						localStorage.clear()
+						/*清空本地数据end*/
+
+						var indexView = hui.getView('./sub_forum.html');
+						var _self = plus.webview.currentWebview();
+						hui.toast('传参:' + _self.order_code);
+
+						hui.formInit()
+
+						/*归属地 start*/
+						$("#phone").intlTelInput({
+							preferredCountries: ['CA', 'US', 'CN'],
+							initialCountry: 'CA',
+							geoIpLookup: function(callback) {
+								$.get('https://ipinfo.io', function() {}, "jsonp").always(function(resp) {
+									var countryCode = (resp && resp.country) ? resp.country : "";
+									console.log(countryCode)
+									callback(countryCode);
+								});
+							},
+							utilsScript: "../libs/intlTelInput/js/utils.js"
+						});
+						/*归属地 end*/
+
+						/*手机号码获取光标 start*/
+						$("#phone").on('countrychange', function() {
+							$('#phonenum').focus();
+						})
+						$("#phone").on('focus', function() {
+							$('#phonenum').focus();
+						})
+						/*手机号码获取光标 end*/
+
+						/*获取验证码 start*/
+						$('#phonenum').on('input', function() {
+							if($('#phonenum').val()) {
+								$('#dianji_huoqu').css('color', 'red')
+							} else {
+								$('#dianji_huoqu').css('color', 'pink')
+							}
+
+						})
+						var btn = document.getElementById('dianji_huoqu');
+						btn.addEventListener('click', btnClick);
+
+						function btnClick() {
+							if($('#phonenum').val()) {
+								/*获取验证码*/
+								var code = $("#phone").intlTelInput("getSelectedCountryData")
+								var data = {}
+								data.phone = $('#phonenum').val()
+								data.international_code = code.dialCode
+								var init = function() {
+									$('#dianji_huoqu').show()
+									$('#dianji_huoqu1').hide()
+									$('#dianji_huoqu1').html('60')
+									btn.addEventListener('click', btnClick);
+
+								}
+								var n = 60
+								btn.removeEventListener('click', btnClick);
+								$('#dianji_huoqu').hide()
+								$('#dianji_huoqu1').show()
+								var timer = setInterval(function() {
+										n--
+										$('#dianji_huoqu1').html(n)
+										if(n == 0) {
+											init()
+											clearInterval(timer)
+										}
+
+									},
+									1000)
+
+								axios.post('/app_dealer/login_before/account/get_code', data)
+									.then(function(response) {
+										var data_msg = response.data
+										if(data_msg.code == 200) {
+
+										} else {
+											init()
+											clearInterval(timer)
+											hui.iconToast('请检查数据格式', 'warn');
+
+										}
+										//					console.log('请求之后的data:'+JSON.stringify(data2))
+
+									})
+									.catch(function(error) {
+										hui.iconToast(error, 'warn');
+									})
+							} else {
+								return false;
+							}
+
+						}
+						/*获取验证码 end*/
+
+						/*提交数据 start*/
+						hui('#submitBtn').click(function() {
+							var code = $("#phone").intlTelInput("getSelectedCountryData")
+							var data = hui.getFormData('#form1');
+							data.pwd = md5(data.pwd)
+							data.international_code = code.dialCode
+							var res = huiFormCheck('#form1');
+							console.log(JSON.stringify(data))
+							/*前端验证表单*/
+							if(res) {
+								axios.post('/app_sale_manager/login_before/account/verification_code', data)
+									.then(function(response) {
+										var data_msg = response.data
+										//					console.log('请求之后的data:'+JSON.stringify(data2))
+										if(data_msg.code == 200) {
+											hui.iconToast('验证码正确', 'success');
+											return axios.post('/app_sale_manager/login_before/account/forgot', data)
+
+										} else {
+											hui.iconToast('验证码错误', 'warn');
+										}
+
+										//									
+									})
+
+									.then(function(response) {
+										var data_msg = response.data
+										//					console.log('请求之后的data:'+JSON.stringify(data2))
+										if(data_msg.code == 200) {
+											hui.iconToast('修改成功', 'success');
+											setTimeout(function() {
+												hui.Back()
+											}, 1500)
+
+										} else {
+											hui.iconToast('修改失败', 'warn');
+										}
+									})
+									.catch(function(error) {
+										hui.iconToast(error, 'warn');
+									})
+							}
+
+						});
+						/*提交数据 end*/
+					});
+
+				}
+			)
+		</script>
+	</body>
+
+</html>

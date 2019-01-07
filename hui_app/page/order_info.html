@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>HUI</title>
+		<link type="text/css" rel="stylesheet" href="../libs/hui_ku/css/hui.css" />
+		<style type="text/css">
+			.hui-tab {
+				margin-top: 44px;
+			}
+			
+			.hui-tab-title {
+				z-index: 200;
+				position: fixed;
+				background: white;
+				top: 43px;
+				height: 50px;
+				width: 100%;
+			}
+			/* -------------------------------- 
+
+Primary style
+
+-------------------------------- */
+			
+			html * {
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+			}
+			
+			*,
+			*:after,
+			*:before {
+				-webkit-box-sizing: border-box;
+				-moz-box-sizing: border-box;
+				box-sizing: border-box;
+			}
+			
+			body {
+				font-size: 100%;
+				color: #7f8c97;
+				background-color: #e9f0f5;
+			}
+			
+			img {
+				max-width: 100%;
+			}
+			/* -------------------------------- 
+
+Modules - reusable parts of our design
+
+-------------------------------- */
+			
+			.cd-container {
+				/* this class is used to give a max-width to the element it is applied to, and center it horizontally when it reaches that max-width */
+				width: 90%;
+				max-width: 1170px;
+				margin: 0 auto;
+			}
+			
+			.cd-container::after {
+				/* clearfix */
+				content: '';
+				display: table;
+				clear: both;
+			}
+			/* -------------------------------- 
+
+Main components 
+
+-------------------------------- */
+			
+			#cd-timeline {
+				position: relative;
+				padding: 2em 0;
+				margin-top: 2em;
+				margin-bottom: 2em;
+			}
+			
+			#cd-timeline::before {
+				/* this is the vertical line */
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 18px;
+				height: 100%;
+				width: 4px;
+				background: #d7e4ed;
+			}
+			
+			@media only screen and (min-width: 1170px) {
+				#cd-timeline {
+					margin-top: 3em;
+					margin-bottom: 3em;
+				}
+				#cd-timeline::before {
+					left: 50%;
+					margin-left: -2px;
+				}
+			}
+			
+			.cd-timeline-block {
+				position: relative;
+				margin: 2em 0;
+			}
+			
+			.cd-timeline-block:after {
+				content: "";
+				display: table;
+				clear: both;
+			}
+			
+			.cd-timeline-block:first-child {
+				margin-top: 0;
+			}
+			
+			.cd-timeline-block:last-child {
+				margin-bottom: 0;
+			}
+			
+			@media only screen and (min-width: 1170px) {
+				.cd-timeline-block {
+					margin: 4em 0;
+				}
+				.cd-timeline-block:first-child {
+					margin-top: 0;
+				}
+				.cd-timeline-block:last-child {
+					margin-bottom: 0;
+				}
+			}
+			
+			.cd-timeline-img {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 40px;
+				height: 40px;
+				border-radius: 50%;
+				box-shadow: 0 0 0 4px white, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05);
+			}
+			
+			.cd-timeline-img img {
+				display: block;
+				width: 24px;
+				height: 24px;
+				position: relative;
+				left: 50%;
+				top: 50%;
+				margin-left: -12px;
+				margin-top: -12px;
+			}
+			
+			.cd-timeline-img.cd-picture {
+				background: #75ce66;
+			}
+			
+			.cd-timeline-img.cd-movie {
+				background: #c03b44;
+			}
+			
+			.cd-timeline-img.cd-location {
+				background: #f0ca45;
+			}
+			
+			@media only screen and (min-width: 1170px) {
+				.cd-timeline-img {
+					width: 60px;
+					height: 60px;
+					left: 50%;
+					margin-left: -30px;
+					/* Force Hardware Acceleration in WebKit */
+					-webkit-transform: translateZ(0);
+					-webkit-backface-visibility: hidden;
+				}
+				.cssanimations .cd-timeline-img.is-hidden {
+					visibility: hidden;
+				}
+				.cssanimations .cd-timeline-img.bounce-in {
+					visibility: visible;
+					-webkit-animation: cd-bounce-1 0.6s;
+					-moz-animation: cd-bounce-1 0.6s;
+					animation: cd-bounce-1 0.6s;
+				}
+			}
+			
+			.cd-timeline-content {
+				position: relative;
+				margin-left: 60px;
+				background: white;
+				border-radius: 0.25em;
+				padding: 1em;
+				box-shadow: 0 3px 0 #d7e4ed;
+			}
+			
+			.cd-timeline-content:after {
+				content: "";
+				display: table;
+				clear: both;
+			}
+			
+			.cd-timeline-content h2 {
+				color: #303e49;
+			}
+			
+			.cd-timeline-content p,
+			.cd-timeline-content .cd-read-more,
+			.cd-timeline-content .cd-date {
+				font-size: 13px;
+				font-size: 0.8125rem;
+			}
+			
+			.cd-timeline-content .cd-read-more,
+			.cd-timeline-content .cd-date {
+				display: inline-block;
+			}
+			
+			.cd-timeline-content p {
+				margin: 1em 0;
+				line-height: 1.6;
+			}
+			
+			.cd-timeline-content .cd-read-more {
+				float: right;
+				padding: .8em 1em;
+				background: #acb7c0;
+				color: white;
+				border-radius: 0.25em;
+			}
+			
+			.no-touch .cd-timeline-content .cd-read-more:hover {
+				background-color: #bac4cb;
+			}
+			
+			a.cd-read-more:hover {
+				text-decoration: none;
+				background-color: #424242;
+			}
+			
+			.cd-timeline-content .cd-date {
+				float: left;
+				padding: .8em 0;
+				opacity: .7;
+			}
+			
+			.cd-timeline-content::before {
+				content: '';
+				position: absolute;
+				top: 16px;
+				right: 100%;
+				height: 0;
+				width: 0;
+				border: 7px solid transparent;
+				border-right: 7px solid white;
+			}
+			
+			@media only screen and (min-width: 768px) {
+				.cd-timeline-content h2 {
+					font-size: 20px;
+					font-size: 1.25rem;
+				}
+				.cd-timeline-content p {
+					font-size: 16px;
+					font-size: 1rem;
+				}
+				.cd-timeline-content .cd-read-more,
+				.cd-timeline-content .cd-date {
+					font-size: 14px;
+					font-size: 0.875rem;
+				}
+			}
+			
+			@media only screen and (min-width: 1170px) {
+				.cd-timeline-content {
+					margin-left: 0;
+					padding: 1.6em;
+					width: 45%;
+				}
+				.cd-timeline-content::before {
+					top: 24px;
+					left: 100%;
+					border-color: transparent;
+					border-left-color: white;
+				}
+				.cd-timeline-content .cd-read-more {
+					float: left;
+				}
+				.cd-timeline-content .cd-date {
+					position: absolute;
+					width: 100%;
+					left: 122%;
+					top: 6px;
+					font-size: 16px;
+					font-size: 1rem;
+				}
+				.cd-timeline-block:nth-child(even) .cd-timeline-content {
+					float: right;
+				}
+				.cd-timeline-block:nth-child(even) .cd-timeline-content::before {
+					top: 24px;
+					left: auto;
+					right: 100%;
+					border-color: transparent;
+					border-right-color: white;
+				}
+				.cd-timeline-block:nth-child(even) .cd-timeline-content .cd-read-more {
+					float: right;
+				}
+				.cd-timeline-block:nth-child(even) .cd-timeline-content .cd-date {
+					left: auto;
+					right: 122%;
+					text-align: right;
+				}
+				.cssanimations .cd-timeline-content.is-hidden {
+					visibility: hidden;
+				}
+				.cssanimations .cd-timeline-content.bounce-in {
+					visibility: visible;
+					-webkit-animation: cd-bounce-2 0.6s;
+					-moz-animation: cd-bounce-2 0.6s;
+					animation: cd-bounce-2 0.6s;
+				}
+			}
+			
+			@media only screen and (min-width: 1170px) {
+				/* inverse bounce effect on even content blocks */
+				.cssanimations .cd-timeline-block:nth-child(even) .cd-timeline-content.bounce-in {
+					-webkit-animation: cd-bounce-2-inverse 0.6s;
+					-moz-animation: cd-bounce-2-inverse 0.6s;
+					animation: cd-bounce-2-inverse 0.6s;
+				}
+			}
+			
+			.xialaxian {
+				margin-top: 20px;
+				width: 100%;
+				height: 1px;
+				background: wheat;
+				margin-bottom: 20px;
+			}
+			
+			.self_table {
+				margin-top: 65px;
+			}
+			
+			.self_table table {
+				margin-bottom: 13px;
+			}
+			
+			.self_font_cu {
+				font-weight: bold;
+				padding-left: 3px;
+			}
+			
+			#order_price_content {
+				margin-top: 20px;
+			}
+			
+			.hui-accordion-title::after {
+				content: '';
+			}
+			
+			.hui-accordion-title span {
+				float: right;
+				margin-top: 12px;
+			}
+			
+			#order_baojia {
+				color: red;
+				font-size: 20px;
+				font-weight: 700;
+			}
+			
+			.hui-list li {
+				height: 100%;
+				width: 100%;
+			}
+			
+			.self_table1 {
+				width: 100%;
+				/*background: darkgrey;*/
+			}
+			
+			.self_table1 table {
+				width: 100%;
+			}
+			
+			.self_table1 table tr {
+				width: 100%;
+				/*background: palevioletred;*/
+			}
+			
+			.self_table1 th {
+				width: 50%;
+				text-align: right;
+				/*background: blue*/
+			}
+			
+			.self_table1 td {
+				/*background: red;*/
+				width: 50%;
+				text-align: left;
+				color: dodgerblue;
+			}
+			
+			.area {
+				height: 30px;
+				width: 100%;
+				background: wheat;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="hui-header">
+			<div id="hui-back"></div>
+			<h1>订单信息</h1>
+		</header>
+
+		<div class="hui-tab">
+			<div class="hui-tab-title">
+				<div class="order_info">订单信息</div>
+				<div class="zonglan">总览</div>
+			</div>
+			<div class="hui-tab-body">
+				<div class="hui-tab-body-items">
+					<div class="hui-tab-item hui-list" id="order_info">
+						<div class="self_table">
+							<table width="100%">
+								<tr width="100%">
+									<td width="40%" class="self_font_cu">订单号:</td>
+									<td width="60%" id="order_number"> </td>
+								</tr>
+							</table>
+
+							<table width="100%">
+								<tr width="100%">
+									<td width="40%" class="self_font_cu">是否安装 :</td>
+									<td width="60%" id="shifo_anzhuang"> </td>
+								</tr>
+							</table>
+
+							<table width="100%">
+								<tr width="100%">
+									<td width="40%" class="self_font_cu">客户名 :</td>
+									<td width="60%" id="customer"> </td>
+								</tr>
+							</table>
+
+							<table width="100%">
+								<tr width="100%">
+									<td width="40%" class="self_font_cu">电话:</td>
+									<td width="60%" id="phone"> </td>
+								</tr>
+							</table>
+							<table width="100%">
+								<tr width="100%">
+									<td width="40%" class="self_font_cu">送货地址:</td>
+									<td width="60%" style="color: #3388FF;" id="ship_address"></td>
+								</tr>
+							</table>
+							<table width="100%">
+								<tr width="100%">
+									<td width="40%" class="self_font_cu">预计送货时间:</td>
+									<td width="60%" style="color: #3388FF;" id="delivery_time"></td>
+								</tr>
+							</table>
+							<table width="100%">
+								<tr width="100%">
+									<td width="50%" class="self_font_cu">描述:</td>
+									<td width="50%" id="description"> </td>
+								</tr>
+							</table>
+							<div class="xialaxian"></div>
+							<div class="order_curtain_info">
+								<div class="hui-accordion">
+									<div class="hui-accordion-title">横帘 <span class="hui-badge hui-primary" id="henglian_biaoshi">0</span></div>
+									<div class="hui-accordion-content hui-list">
+										<ul id="henglian_info">
+										</ul>
+									</div>
+								</div>
+								<div class="hui-accordion">
+									<div class="hui-accordion-title">卷帘 <span class="hui-badge hui-primary" id="juanlian_biaoshi">0</span></div>
+									<div class="hui-accordion-content hui-list">
+										<ul id="juanlian_info">
+
+										</ul>
+									</div>
+								</div>
+								<div class="hui-accordion">
+									<div class="hui-accordion-title">片帘 <span class="hui-badge hui-primary" id="pianlian_biaoshi">0</span></div>
+									<div class="hui-accordion-content hui-list">
+										<ul id="pianlian_info">
+
+										</ul>
+									</div>
+								</div>
+								<div class="hui-accordion">
+									<div class="hui-accordion-title">布帘 <span class="hui-badge hui-primary" id="bulian_biaoshi">0</span></div>
+									<div class="hui-accordion-content hui-list">
+										<ul id="bulian_info">
+
+										</ul>
+									</div>
+								</div>
+
+							</div>
+
+							<div id="order_price_content">
+								<table width="100%">
+									<tr width="100%">
+										<td width="50%" class="self_font_cu">订单原价:</td>
+										<td width="50%" style="color: #3388FF;" id="order_price"></td>
+									</tr>
+								</table>
+								<table width="100%">
+									<tr width="100%">
+										<td width="50%" class="self_font_cu">折扣:</td>
+										<td width="50%" style="color: #3388FF;" id="discount"></td>
+									</tr>
+								</table>
+								<table width="100%">
+									<tr width="100%">
+										<td width="50%" class="self_font_cu">订单价:</td>
+										<td width="50%" style="color: #3388FF;" id="total_price"></td>
+									</tr>
+								</table>
+
+								<table width="100%">
+									<tr width="100%">
+										<td width="50%" class="self_font_cu">报价:</td>
+										<td width="50%" style="color: #3388FF;">
+											<input type="number" class="hui-input hui-input-clear" name="nickname" id="order_baojia" />
+										</td>
+									</tr>
+								</table>
+
+							</div>
+
+							<div id="order_modify">
+								<button type="button" id="order_modify1" class="hui-button hui-primary" style="margin:0 auto;margin-top:43px;margin-bottom:43px;">修改报价</button>
+							</div>
+						</div>
+					</div>
+
+					<div class="hui-tab-item hui-list" id="zonglan">
+						<section id="cd-timeline" class="cd-container">
+						</section>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="../libs/hui_ku/js/hui.js"></script>
+		<script type="text/javascript" src="../libs/hui_ku/js/hui-accordion.js"></script>
+		<script src="../libs/hui_ku/js/hui-tab.js" type="text/javascript"></script>
+		<script type="text/javascript" src="../libs/jquery/jquery-2.1.0.js"></script>
+		<script type="text/javascript" src="../libs/crypto/crypto-js.js"></script>
+		<script type="text/javascript" src="../libs/crypto/rc4.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script type="text/javascript" src="../js/self_comment.js"></script>
+		<script type="text/javascript">
+			hui.tab('.hui-tab');
+			hui.accordion(false, false);
+		</script>
+		<script type="text/javascript">
+			hui.plusReady(function() {
+				var indexView = hui.getView('./sub_news.html');
+				var _self = plus.webview.currentWebview();
+				//								hui.toast('传参: name : ' + _self.order_code);
+				var id = _self.order_code
+				var code_arr = localStorage.getItem('code')
+				code_arr = JSON.parse(code_arr)
+				console.log('这是本地code表' + JSON.stringify(code_arr))
+				var data = {
+					"id": id,
+				}
+				hui('.order_info').click(function() {
+					$('.hui-tab-body-items').css('height', $('#order_info').height())
+					hui.scrollTop(0);
+				})
+				hui('.zonglan').click(function() {
+					$('.hui-tab-body-items').css('height', $('#zonglan').height())
+					hui.scrollTop(0);
+				})
+
+				/*点击修改报价*/
+				hui('#order_modify1').click(function() {
+					var modify_data = {
+						'order_id': id,
+						'quoted_price': hui('#order_baojia').val()
+					}
+					axios.post('/app_sale_manager/login_after/price/quote', modify_data)
+						.then(function(response) {
+							var data_msg = response.data
+							//							console.log('这是修改订单报价' + JSON.stringify(data_msg))
+							if(data_msg.code == 200) {
+								hui.iconToast('修改订单报价成功', 'success');
+								hui.Back()
+							} else {
+								hui.iconToast('修改订单报价失败', 'warn');
+							}
+						})
+						.catch(function(error) {
+							hui.iconToast(error, 'warn');
+						})
+
+				})
+				/*获取订单总览start*/
+				axios.post('/app_dealer/login_after/order/track', data)
+					.then(function(response) {
+						var data_msg = response.data
+													console.log('这是获取订单总览' + JSON.stringify(data_msg))
+						if(data_msg.code == 200) {
+							hui.iconToast('修改订单报价成功', 'success');
+//							hui.Back()
+						} else {
+							hui.iconToast('修改订单报价失败', 'warn');
+						}
+					})
+					.catch(function(error) {
+						hui.iconToast(error, 'warn');
+					})
+				/*获取订单总览end*/
+
+				/*获取订单信息*/
+				axios.post('/app_dealer/login_after/order/get', data)
+					.then(function(response) {
+						var data_msg = response.data
+						//						console.log('这是订单信息' + JSON.stringify(data_msg))
+						var data2 = {
+							"id": data_msg.data.ship_address
+						}
+						//console.log('请求之后的data:'+JSON.stringify(data2))
+						$('#order_number').html(data_msg.data.order_number)
+						$('#shifo_anzhuang').html(data_msg.data.is_install)
+						$('#description').html(data_msg.data.description)
+						$('#delivery_time').html(data_msg.data.delivery_time)
+						hui('#order_baojia').val(data_msg.data.quoted_price)
+						hui('#order_price').html(data_msg.data.order_price)
+						hui('#discount').html(data_msg.data.discount)
+						hui('#total_price').html(data_msg.data.total_price)
+						return axios.post('/app_dealer/login_after/address/get', data2)
+
+					}).then(function(response) {
+						var data_msg = response.data
+						//						console.log('这是送货地址' + JSON.stringify(data_msg))
+						var ship_address_html = data_msg.data[0].country + '/' + data_msg.data[0].province + '/' +
+							data_msg.data[0].city + '/' + data_msg.data[0].street + '/' + data_msg.data[0].bldg + '/' +
+							data_msg.data[0].postcode + '/'
+						$('#ship_address').html(ship_address_html)
+						$('#phone').html(data_msg.data[0].tel)
+						$('#customer').html(data_msg.data[0].last_name + data_msg.data[0].first_name)
+					})
+					.catch(function(error) {
+						hui.iconToast(error, 'warn');
+					})
+
+				/*获取帘的参数*/
+				var lian_data = {
+					"order_id": id,
+					"unit": localStorage.getItem('unit')
+				}
+				/*获取横帘*/
+				axios.post('/app_dealer/login_after/curtain/blind/get', lian_data)
+					.then(function(response) {
+						var data_msg = response.data
+						if(data_msg.data) {
+							$('#henglian_biaoshi').html(data_msg.data.length)
+						}
+						//console.log('这是横帘订单信息' + JSON.stringify(data_msg))
+						var html = ''
+
+						for(var i = 0; i < data_msg.data.length; i++) {
+							//							if(data_msg.data[i].valence_material=='1122'){
+							//								data_msg.data[i].valence_material=1
+							//							}
+							function valence_material(age, index, arr, a) {
+								return age.labelcode == data_msg.data[i].valence_material;
+							}
+
+							function returns_material(age, index, arr, a) {
+								return age.labelcode == data_msg.data[i].returns_material;
+							}
+							html += ` <li>
+											<div class="self_table1">
+													<table border="0">
+													<tr>
+														<th>curtain_number:</th>
+														<td>${data_msg.data[i].curtain_number}</td>
+													</tr>
+												
+												
+													<tr>
+														<th>curtain_material:</th>
+														<td>${data_msg.data[i].curtain_material}</td>
+													</tr>
+												
+												
+													<tr>
+														<th>is_old_rod:</th>
+														<td>${data_msg.data[i].is_old_rod}</td>
+													</tr>
+													<tr>
+														<th>valence:</th>
+														<td>${data_msg.data[i].valence}</td>
+													</tr>
+													<tr>
+														<th>valence_material:</th>
+														<td>${code_arr.filter(valence_material)[0].value}</td>
+													</tr>
+													<tr>
+														<th>returns:</th>
+														<td>${data_msg.data[i].returns}</td>
+													</tr> 
+													<tr>
+														<th>returns_material:</th>
+														<td>${code_arr.filter(returns_material)[0].value}</td>
+													</tr>
+													<tr>
+														<th>vane_thickness:</th>
+														<td>${data_msg.data[i].vane_thickness}</td>
+													</tr>
+													
+												</table>
+												<div class="xialaxian"></div>
+												</div>		
+											</li>`
+						}
+						$('#henglian_info').html(html)
+					})
+					.catch(function(error) {
+						hui.iconToast(error, 'warn');
+					})
+
+				/*获取卷帘*/
+				axios.post('/app_dealer/login_after/curtain/rollshade/get', lian_data)
+					.then(function(response) {
+						var data_msg = response.data
+//						console.log('这是卷帘订单信息' + JSON.stringify(data_msg))
+						if(data_msg.data) {
+							$('#juanlian_biaoshi').html(data_msg.data.length)
+						}
+						var html = ''
+
+						for(var i = 0; i < data_msg.data.length; i++) {
+							//							if(data_msg.data[i].valence_material=='1122'){
+							//								data_msg.data[i].valence_material=1
+							//							}
+							function valence_material(age, index, arr, a) {
+								return age.labelcode == data_msg.data[i].valence_material;
+							}
+
+							function returns_material(age, index, arr, a) {
+								return age.labelcode == data_msg.data[i].returns_material;
+							}
+							html += ` <li>
+											<div class="self_table1">
+													<table border="0">
+													<tr>
+														<th>curtain_number:</th>
+														<td>${data_msg.data[i].curtain_number}</td>
+													</tr>
+												
+												
+													<tr>
+														<th>curtain_material:</th>
+														<td>${data_msg.data[i].curtain_material}</td>
+													</tr>
+													<tr>
+														<th>curtain_material_desc:</th>
+														<td>${data_msg.data[i].curtain_material_desc}</td>
+													</tr>
+												
+												
+													<tr>
+														<th>is_old_rod:</th>
+														<td>${data_msg.data[i].is_old_rod}</td>
+													</tr>
+													<tr>
+														<th>valence:</th>
+														<td>${data_msg.data[i].valence}</td>
+													</tr>
+													<tr>
+														<th>valence_material:</th>
+														<td>${code_arr.filter(valence_material)[0].value}</td>
+													</tr>
+													<tr>
+														<th>returns:</th>
+														<td>${data_msg.data[i].returns}</td>
+													</tr> 
+													<tr>
+														<th>returns_material:</th>
+														<td>${code_arr.filter(returns_material)[0].value}</td>
+													</tr>
+													<tr>
+														<th>curtain_desc:</th>
+														<td>${data_msg.data[i].curtain_desc}</td>
+													</tr>
+													
+												</table>
+												<div class="xialaxian"></div>
+												</div>		
+											</li>`
+						}
+						$('#juanlian_info').html(html)
+					})
+					.catch(function(error) {
+						hui.iconToast(error, 'warn');
+					})
+
+				/*获取片帘*/
+				axios.post('/app_dealer/login_after/curtain/panel/get', lian_data)
+					.then(function(response) {
+						var data_msg = response.data
+						//						console.log('这是片帘订单信息' + JSON.stringify(data_msg))
+						if(data_msg.data) {
+							$('#pianlian_biaoshi').html(data_msg.data.length)
+						}
+						var html = ''
+
+						for(var i = 0; i < data_msg.data.length; i++) {
+							//							if(data_msg.data[i].valence_material=='1122'){
+							//								data_msg.data[i].valence_material=1
+							//							}
+							function tract_control(age, index, arr, a) {
+								return age.labelcode == data_msg.data[i].tract_control
+							}
+
+							function tract_stack(age, index, arr, a) {
+								return age.labelcode == data_msg.data[i].tract_stack;
+							}
+							html += ` <li>
+											<div class="self_table1">
+													<table border="0">
+													<tr>
+														<th>curtain_number:</th>
+														<td>${data_msg.data[i].curtain_number}</td>
+													</tr>
+												
+												
+													<tr>
+														<th>curtain_material:</th>
+														<td>${data_msg.data[i].curtain_material}</td>
+													</tr>
+													<tr>
+														<th>curtain_material_desc:</th>
+														<td>${data_msg.data[i].curtain_material_desc}</td>
+													</tr>
+												
+												
+													<tr>
+														<th>is_old_rod:</th>
+														<td>${data_msg.data[i].is_old_rod}</td>
+													</tr>
+												
+													<tr>
+														<th>tract_control:</th>
+														<td>${code_arr.filter(tract_control)[0].value}</td>
+													</tr>
+													
+													<tr>
+														<th>tract_stack:</th>
+														<td>${code_arr.filter(tract_stack)[0].value}</td>
+													</tr>
+													<tr>
+														<th>panel_num:</th>
+														<td>${data_msg.data[i].panel_num}</td>
+													</tr>
+													<tr>
+														<th>curtain_desc:</th>
+														<td>${data_msg.data[i].curtain_desc}</td>
+													</tr>
+													
+												</table>
+												<div class="xialaxian"></div>
+												</div>		
+											</li>`
+						}
+						$('#pianlian_info').html(html)
+					})
+					.catch(function(error) {
+						hui.iconToast(error, 'warn');
+					})
+
+				/*获取布帘*/
+				axios.post('/app_dealer/login_after/curtain/cloth/get', lian_data)
+					.then(function(response) {
+						var data_msg = response.data
+//						console.log('这是布帘订单信息' + JSON.stringify(data_msg))
+						if(data_msg.data) {
+							$('#bulian_biaoshi').html(data_msg.data.length)
+						}
+						var html = ''
+						for(var i = 0; i < data_msg.data.length; i++) {
+							function curtain_type(age, index, arr, a) {
+								return age.labelcode == data_msg.data[i].curtain_type
+							}
+
+							html += ` <li>
+											<div class="self_table1">
+													<table border="0">
+													<tr>
+														<th>curtain_number:</th>
+														<td>${data_msg.data[i].curtain_number}</td>
+													</tr>
+												
+												
+													<tr>
+														<th>curtain_material:</th>
+														<td>${data_msg.data[i].curtain_material}</td>
+													</tr>
+												
+												    <tr>
+														<th>curtain_material_desc:</th>
+														<td>${data_msg.data[i].curtain_material_desc}</td>
+													</tr>
+												
+													<tr>
+														<th>is_old_rod:</th>
+														<td>${data_msg.data[i].is_old_rod}</td>
+													</tr>
+													<tr>
+														<th>curtain_count:</th>
+														<td>${data_msg.data[i].curtain_count}</td>
+													</tr>
+													<tr>
+														<th>curtain_desc:</th>
+														<td>${data_msg.data[i].curtain_desc}</td>
+													</tr>
+											
+													<tr>
+														<th>curtain_type:</th>
+														<td>${code_arr.filter(curtain_type)[0].value}</td>
+													</tr>
+													
+												</table>
+												<div class="xialaxian"></div>
+												</div>		
+											</li>`
+						}
+						$('#bulian_info').html(html)
+
+						//						return axios.post('/app_dealer/login_after/address/get', data2)
+
+					})
+					.catch(function(error) {
+						hui.iconToast(error, 'warn');
+					})
+
+				/*测试数据*/
+				var time_arr = [{
+						time: '2015 - 01 - 06',
+						content: 'oc',
+						title: "oc",
+						img: '../img/logo_1.png'
+					},
+					{
+						time: '2015 - 01 - 06',
+						content: 'oh',
+						title: "oc",
+						img: '../img/logo_1.png'
+					},
+					{
+						time: '2015 - 01 - 06',
+						content: 'om',
+						title: "oc",
+						img: '../img/logo_1.png'
+					},
+					{
+						time: '2015 - 01 - 06',
+						content: 'on',
+						title: "oc",
+						img: '../img/logo_1.png'
+					},
+				]
+				var temp = ''
+				time_arr.forEach(function(e, index) {
+					if(index % 2 == 0) {
+						temp += '<div class="cd-timeline-block">' +
+							'<div class="cd-timeline-img cd-picture">' +
+							'<img src="' + e.img + '" alt="Picture">' +
+							'</div>' +
+							'<div class="cd-timeline-content">' +
+							'<h2>' + e.title + '</h2>' +
+							'<p>' + e.content + '</p>' +
+							'<a href="" class="cd-read-more" target="_blank">阅读全文</a>' +
+							'<span class="cd-date">' + e.time + '</span>' +
+							'</div>' +
+							'</div>'
+
+					}
+					if(index % 2 == 1) {
+						temp += '<div class="cd-timeline-block">' +
+							'<div class="cd-timeline-img cd-movie">' +
+							'<img src="' + e.img + '" alt="Movie">' +
+							'</div>' +
+							'<div class="cd-timeline-content">' +
+							'<h2>' + e.title + '</h2>' +
+							'<p>' + e.content + '</p>' +
+							'<a href="" class="cd-read-more" target="_blank">阅读全文</a>' +
+							'<span class="cd-date">' + e.time + '</span>' +
+							'</div>' +
+							'</div>'
+					}
+
+				})
+
+				$('#cd-timeline').html(temp)
+
+			});
+		</script>
+	</body>
+
+</html>

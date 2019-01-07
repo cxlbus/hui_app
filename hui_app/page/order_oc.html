@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>HUI</title>
+		<link type="text/css" rel="stylesheet" href="../libs/hui_ku/css/hui.css" />
+		<style type="text/css">
+			#list {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.zhanwei_fu {
+				height: 660px;
+				width: 100%;
+				background: white;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="hui-wrap">
+			<div id="refreshContainer">
+				<div class="hui-refresh-icon"></div>
+				<div class=" hui-media-list" style="padding:10px;">
+					<ul id="list">
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../libs/hui_ku/js/hui.js"></script>
+		<script src="../libs/hui_ku/js/hui-refresh-load-more.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="../libs/jquery/jquery-2.1.0.js"></script>
+		<script type="text/javascript" src="../libs/crypto/crypto-js.js"></script>
+		<script type="text/javascript" src="../libs/crypto/rc4.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script type="text/javascript" src="../js/self_comment.js"></script>
+		<script type="text/javascript">
+			//禁用返回键
+			hui.Back = null;
+			//加密
+
+			hui.plusReady(function() {
+				var indexView = hui.getView('./sub_news.html');
+				var order_status=["1102"]
+				//下拉加载
+				hui.refresh('#refreshContainer', refresh_oc);
+				hui.loadMore(getMore_oc);
+				/*上拉加载*/
+				function getMore_oc() {
+					var data = {
+						"dealer_id": "",
+						"order_number": "20",
+						"order_status":order_status,
+						"order_pay_status": "All",
+						"page_num": page_oc,
+						"page_size": "30"
+					}
+					axios.post('/app_dealer/login_after/order/orders', data)
+						.then(function(response) {
+							var data_msg = response.data
+							if(data_msg.order.length == 0) {
+								hui.endLoadMore(true, '已经到头了...');
+								return false;
+							}
+							for(var i = 0; i < data_msg.order.length; i++) {
+								var li = document.createElement('li');
+								li.innerHTML = '<a href="javascript:self_comment.to_xiangqing(' + i + ');"><div class="hui-list-text">' + data_msg.order[i].id + '</div></a>';
+								hui(li).appendTo('#list');
+							}
+							page_oc++;
+							hui.endLoadMore();
+
+						})
+						.catch(function(error) {
+							hui.iconToast(error.status, 'warn');
+						})
+
+				}
+				/*下拉刷新*/
+				function refresh_oc() {
+					var data = {
+						"dealer_id": "",
+						"order_number": "20",
+						"order_status":order_status,
+						"order_pay_status": "All",
+						"page_num": "0",
+						"page_size": "30"
+					}
+
+					axios.post('/app_dealer/login_after/order/orders', data)
+						.then(function(response) {
+							var data_msg = response.data
+							if(data_msg.code == 200) {
+								if(data_msg.data.length != 0) {
+									var html = ''
+									for(var i = 0; i < data_msg.data.length; i++) {
+										html +=
+											`<li>
+											<a href = "javascript:self_comment.to_xiangqing(${data_msg.data[i].id})" >
+											<div class = "hui-media-list-img" > 
+											<img src = "../img/logo_1.png"/> 
+											</div>
+											<div class = "hui-media-content">
+											<h1 > ${data_msg.data[i].order_number} </h1> 
+											<p>${data_msg.data[i].create_time} </p> 
+											</div> 
+											</a> 
+											</li>`
+									}
+
+									hui('#list').html(html);
+								}
+								page_oc = 1
+								//结束刷新
+								hui.endRefresh();
+								//重置加载更多状态
+								hui.resetLoadMore();
+							}
+
+						})
+						.catch(function(error) {
+							hui.iconToast(error, 'warn');
+						});
+
+				}
+
+			});
+		</script>
+	</body>
+
+</html>

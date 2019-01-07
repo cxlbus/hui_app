@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>HUI</title>
+<link type="text/css" rel="stylesheet" href="../libs/hui_ku/css/hui.css" />
+</head>
+<body>
+
+<div class="hui-wrap">
+			<div id="refreshContainer" class="hui-refresh">
+				<div class="hui-refresh-icon"></div>
+				<div class="hui-refresh-content hui-list">
+					<ul id="list"></ul>
+				</div>
+			</div>
+		</div>
+<script type="text/javascript" src="../libs/hui_ku/js/hui.js"></script>
+<script src="../libs/hui_ku/js/hui-refresh-load-more.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="../libs/jquery/jquery-2.1.0.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="../js/self_comment.js"></script>
+		
+<script type="text/javascript">
+//禁用返回键
+hui.Back = null;
+hui.plusReady(function(){
+    var indexView = hui.getView('./sub_news.html');
+ 
+//  下拉加载
+   	hui.refresh('#refreshContainer', refresh_oc);
+				hui.loadMore(getMore_oc);
+
+				function getMore_oc() {
+					hui.get(
+						'http://hoa.hcoder.net/index.php?user=hcoder&pwd=hcoder&m=list1&page=' + page_oc,
+						function(res) {
+							//判断加载完毕
+							if(res == 'null') {
+								hui.endLoadMore(true, '已经到头了...');
+								return false;
+							}
+							var data = res.split('--hcSplitor--');
+							for(var i = 0; i < data.length; i++) {
+								var li = document.createElement('li');
+								li.innerHTML = '<a href="javascript:self_comment.to_xiangqing(' + i + ');"><div class="hui-list-text">' + data[i] + '</div></a>';
+								hui(li).appendTo('#list');
+							}
+							page_oc++;
+							hui.endLoadMore();
+						}
+					);
+				}
+
+				function refresh_oc() {
+					hui.loading('加载中...');
+					hui.get(
+						'http://hoa.hcoder.net/index.php?user=hcoder&pwd=hcoder&m=list1&page=1',
+						function(res) {
+							hui.closeLoading();
+							var data = res.split('--hcSplitor--');
+							var html = '';
+							for(var i = 0; i < data.length; i++) {
+								html += '<a href="javascript:self_comment.to_xiangqing(' + i + ');"><div class="hui-list-text">' + data[i] + '</div></a>';
+							}
+							page_oc = 2
+
+							hui('#list').html(html);
+							//结束刷新
+							hui.endRefresh();
+							//重置加载更多状态
+							hui.resetLoadMore();
+						},
+						function() {
+							hui.closeLoading();
+							hui.upToast('连接服务器失败！');
+							hui.endRefresh();
+						}
+					);
+				}
+
+    
+});
+</script>
+</body>
+</html>

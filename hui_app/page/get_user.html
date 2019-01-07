@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>HUI</title>
+		<link type="text/css" rel="stylesheet" href="../libs/hui_ku/css/hui.css" />
+		<link rel="stylesheet" href="../libs/intlTelInput/css/intlTelInput.css">
+		<style type="text/css">
+			#self_img {
+				width: 166px;
+				height: 180px;
+				margin: 0 auto;
+				margin-top: 66px;
+			}
+			
+			#self_img img {
+				width: 100%;
+				height: 100%;
+				text-align: center;
+			}
+			
+			#user_info {
+				margin-top: 30px;
+			}
+			
+			#user_info table {
+				margin-bottom: 25px;
+			}
+			
+			.self_font_cu {
+				font-weight: bold;
+				padding-left: 12%;
+			}
+			
+			#user_modify {
+				width: 100%;
+				height: 50px;
+				text-align: center;
+				margin: 0 auto;
+				margin-top: 35px;
+			}
+			
+			#button_modify {
+				float: left;
+				width: 50%;
+			}
+			
+			#button_del {
+				float: left;
+				width: 50%;
+			}
+			
+			.wen_location {
+				width: 34%;
+				height: 100px;
+				float: left;
+				text-align: end;
+				font-weight: bold;
+			}
+			
+			#user_location {
+				color: #3388FF;
+				width: 60%;
+				height: 100px;
+				float: left;
+				padding-left: 5px;
+			}
+			
+			#user_rebate {
+				width: 100%;
+			}
+			
+			#user_rebate table {
+				border-collapse: collapse;
+				margin: 0 auto;
+				text-align: center;
+			}
+			
+			#user_rebate table td,
+			#user_rebate table th {
+				border: 1px solid #cad9ea;
+				color: #666;
+				height: 30px;
+			}
+			
+			#user_rebate table thead th {
+				background-color: #CCE8EB;
+				width: 100px;
+			}
+			
+			#user_rebate table td input {
+				outline: none;
+				background: none;
+				border: 0;
+				width: 100%;
+				text-align: center;
+			}
+			
+			.hidden {
+				display: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="hui-header">
+			<div id="hui-back"></div>
+			<h1>代理商信息</h1>
+		</header>
+		<div id="self_img">
+			<img src="../img/list/user_1.jpg" alt="" />
+		</div>
+		<input type="" name="rebate_id" id="rebate_id" value="" class="hidden" />
+		<input type="" name="credit_id" id="credit_id" value="" class="hidden" />
+		<div id="user_info">
+			<table width="100%">
+				<tr width="100%">
+					<td width="" class="self_font_cu">用户名:</td>
+					<td>
+						<input type="text" class="hui-input hui-input-clear" name="nickname" id="user_account" readonly="readonly" />
+					</td>
+				</tr>
+			</table>
+
+			<table width="100%">
+				<tr width="100%">
+					<td class="self_font_cu">first_name:</td>
+					<td>
+						<input type="text" class="hui-input hui-input-clear" name="nickname" id="first_name" />
+					</td>
+				</tr>
+			</table>
+			<table width="100%">
+				<tr width="100%">
+					<td class="self_font_cu">last_name:</td>
+					<td>
+						<input type="text" class="hui-input hui-input-clear" name="nickname" id="last_name" />
+					</td>
+				</tr>
+			</table>
+			<table width="100%">
+				<tr width="100%">
+					<td class="self_font_cu">电话:</td>
+					<td>
+						<input type="text" class="hui-input hui-input-clear" name="nickname" id="phone" />
+					</td>
+				</tr>
+			</table>
+
+			<table width="100%">
+				<tr width="100%">
+					<td class="self_font_cu">email:</td>
+					<td>
+						<input type="text" class="hui-input hui-input-clear" name="nickname" id="user_email" />
+					</td>
+				</tr>
+			</table>
+			<table width="100%">
+				<tr width="100%">
+					<td class="self_font_cu">信用额度:</td>
+					<td>
+						<input type="text" class="hui-input hui-input-clear" name="nickname" id="user_credit" />
+					</td>
+				</tr>
+			</table>
+
+			<div id="user_rebate">
+				<table width="100%">
+					<caption>折扣率</caption>
+					<thead>
+						<tr>
+							<th>斑马帘</th>
+							<th>香格里拉帘</th>
+							<th>横帘</th>
+							<th>片帘</th>
+							<th>卷帘</th>
+							<th>布帘</th>
+							<th>all</th>
+						</tr>
+					</thead>
+					<tbody>
+
+						<tr>
+							<td><input type="number" name="" id="1166" value="" /></td>
+							<td><input type="number" name="" id="1167" value="" /></td>
+							<td><input type="number" name="" id="1161" value="" /></td>
+							<td><input type="number" name="" id="1162" value="" /></td>
+							<td><input type="number" name="" id="1163" value="" /></td>
+							<td><input type="number" name="" id="1164" value="" /></td>
+							<td><input type="number" name="" id="all" value="" /></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+		<div id="user_modify">
+			<button id='button_del' type="button" class="hui-button hui-danger" style="">删除代理商</button>
+			<button id='button_modify' type="button" class="hui-button hui-primary" style="">修改信息</button>
+		</div>
+
+		<script type="text/javascript" src="../libs/hui_ku/js/hui.js"></script>
+		<script type="text/javascript" src="../libs/jquery/jquery-2.1.0.js"></script>
+		<script src="../libs/intlTelInput/js/intlTelInput.js"></script>
+		<script type="text/javascript" src="../libs/crypto/crypto-js.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script type="text/javascript" src="../js/self_comment.js"></script>
+
+		<script type="text/javascript">
+			hui.plusReady(function() {
+				var indexView = hui.getView('./sub_forum.html');
+				var _self = plus.webview.currentWebview();
+				var data = {
+					"id": _self.order_code
+				}
+				var data1 = {
+					"dealer_id": _self.order_code
+				}
+				/*获取单个经销商信息 start*/
+
+				axios.post('/app_sale_manager/login_after/dealer/get', data)
+					.then(function(response) {
+						var data_msg = response.data
+						//console.log('单个经销商' + JSON.stringify(data_msg))
+						var user_info = data_msg.data[0]
+						hui('#user_account').val(user_info.account)
+						hui('#phone').val(user_info.phone)
+						hui('#first_name').val(user_info.first_name)
+						hui('#last_name').val(user_info.last_name)
+						hui('#user_email').val(user_info.email)
+						//	console.log(user_info.coutry_code)
+						$("#phone").intlTelInput({
+							preferredCountries: ['CA', 'US', 'CN'],
+							initialCountry: user_info.country_code,
+
+						});
+					})
+					.catch(function(error) {
+						hui.iconToast(error, 'warn');
+					})
+				/*获取单个经销商信息 end*/
+
+				/*获取单个经销商信用额度start*/
+				axios.post('/app_sale_manager/login_after/credit/get', data1)
+					.then(function(response) {
+						var data_msg = response.data
+						var user_info = data_msg.data
+						//						console.log('单个经销商信用额度' + JSON.stringify(data_msg))
+
+						hui('#user_credit').val(user_info.credit_line)
+						$('#credit_id').val(user_info.id)
+					})
+					.catch(function(error) {
+						hui.iconToast(error, 'warn');
+					})
+				/*获取单个经销商信用额度end*/
+
+				/*获取单个经销商折扣率start*/
+				axios.post('/app_sale_manager/login_after/rebate/get', data1)
+					.then(function(response) {
+						var data_msg = response.data
+						//console.log('单个经销商折扣率' + JSON.stringify(data_msg))
+						var rebate_html = ''
+						for(var a = 0; a < data_msg.data.length; a++) {
+							$('#' + data_msg.data[a].curtain_type).val(data_msg.data[a].rebate)
+							$('#' + data_msg.data[a].curtain_type).attr("rebate", data_msg.data[a].id);
+						}
+						//						hui('#user_rebate').html(rebate_html)
+					})
+					.catch(function(error) {
+						hui.iconToast(error, 'warn');
+					})
+				/*获取单个经销商折扣率end*/
+
+				/*获取单个经销商信息start*/
+				hui('#button_modify').click(function() {
+					var credit_line = hui('#user_credit').val()
+					
+					var rebate_data = [{
+							'id': $('#1166').attr('rebate'),
+							"dealer_id": _self.order_code,
+							curtain_type: 1166,
+							rebate: $('#1166').val()
+						},
+						{
+							'id': $('#1167').attr('rebate'),
+							"dealer_id": _self.order_code,
+							curtain_type: 1167,
+							rebate: $('#1167').val()
+						},
+						{
+							'id': $('#1161').attr('rebate'),
+							"dealer_id": _self.order_code,
+							curtain_type: 1161,
+							rebate: $('#1161').val()
+						},
+						{
+							'id': $('#1162').attr('rebate'),
+							"dealer_id": _self.order_code,
+							curtain_type: 1162,
+							rebate: $('#1162').val()
+						},
+						{
+							'id': $('#1163').attr('rebate'),
+							"dealer_id": _self.order_code,
+							curtain_type: 1163,
+							rebate: $('#1163').val()
+						},
+						{
+							'id': $('#1164').attr('rebate'),
+							"dealer_id": _self.order_code,
+							curtain_type: 1164,
+							rebate: $('#1164').val()
+						},
+						{
+							'id': $('#all').attr('rebate'),
+							"dealer_id": _self.order_code,
+							curtain_type: 'all',
+							rebate: $('#all').val()
+						},
+					]
+					//					console.log('这是修改折扣率的参数' + JSON.stringify(rebate_data))
+
+					var credit_data = {
+						"id": $('#credit_id').val(),
+						"dealer_id": _self.order_code,
+						"credit_line": credit_line
+					}
+					var code = $("#phone").intlTelInput("getSelectedCountryData")
+					var dealer_info = {
+						"data": {
+							"id": _self.order_code,
+							"account": $('#user_account').val(),
+							"first_name": $('#first_name').val(),
+							"last_name": $('#last_name').val(),
+							"phone": $('#phone').val(),
+							"international_code": code.dialCode,
+							"country_code": code.iso2,
+							"email": $('#user_email').val(),
+							"manager_id": localStorage.getItem('id'),
+							"manager_account": localStorage.getItem('account')
+						}
+					}
+					/*获取单个经销商信息start*/
+					axios.post('/app_sale_manager/login_after/dealer/modify', dealer_info)
+						.then(function(response) {
+							var data_msg = response.data
+							//console.log('这是修改经销商信息' + JSON.stringify(data_msg))
+
+							//hui('#user_rebate').html(rebate_html)
+						})
+						.catch(function(error) {
+							hui.iconToast(error, 'warn');
+						})
+					/*获取单个经销商信息end*/
+					/*修改经销商的信用额度*/
+					function modify_credit() {
+						if($('#credit_id').val()) {
+							return axios.post('/app_sale_manager/login_after/credit/modify', credit_data);
+						} else {
+							return axios.post('/app_sale_manager/login_after/credit/add', credit_data);
+						}
+					}
+					/*修改经销商的折扣率*/
+					function modify_rebate() {
+						return axios.post('/app_sale_manager/login_after/rebate/modify', rebate_data);
+					}
+
+					axios.all([modify_credit(), modify_rebate()])
+						.then(axios.spread(function(credit, rebate) {
+							// 两个请求现在都执行完成
+							if(credit.data.code == 200 && rebate.data.code == 200) {
+								hui.iconToast('修改成功', 'success')
+								hui.Back()
+							} else {
+								hui.iconToast('修改失败', 'warn')
+							}
+
+						}));
+					//					
+				})
+				/*获取单个经销商信息end*/
+				/*删除单个经销商信息start*/
+				hui('#button_del').click(function() {
+					hui.confirm('您确认要这样做吗？', ['取消', '确定'], function() {
+						axios.post('/app_sale_manager/login_after/dealer/delete', data)
+							.then(function(response) {
+								var data_msg = response.data
+								if(data_msg.code == 200) {
+									hui.iconToast('删除成功', 'success');
+									hui.Back()
+								} else {
+									hui.iconToast('删除失败', 'warn');
+								}
+								//						hui('#user_rebate').html(rebate_html)
+							})
+							.catch(function(error) {
+								hui.iconToast(error, 'warn');
+							})
+					}, function() {});
+
+				})
+
+				/*删除单个经销商信息end*/
+
+				hui.BackDo = function() {
+					//获取要刷新的页面
+					var wiv = plus.webview.getWebviewById('./page/sub_forum.html');
+					wiv.evalJS('location.href = location.href;'); //执行要刷新的函数达到刷新数据的目的
+					return true
+				}
+
+			});
+		</script>
+	</body>
+
+</html>

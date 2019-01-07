@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>HUI</title>
+		<link type="text/css" rel="stylesheet" href="../libs/hui_ku/css/hui.css" />
+		<style type="text/css">
+
+		</style>
+	</head>
+
+	<body>
+
+		<div class="hui-wrap">
+			<div class="hui-list" style="background:#FFFFFF;">
+				<a href="javascript:hui.toast('Hello Hcoder UI !');" style="height:auto; height:80px; padding-bottom:8px;">
+					<div class="hui-list-icons" style="width:110px; height:80px;">
+						<img src="../img/list/home.png" style="width:66px; margin:0px; border-radius:50%;" />
+					</div>
+					<div class="hui-list-text" style="height:79px; line-height:79px;">
+						<div class="hui-list-text-content">
+							设置自己
+						</div>
+						<div class="hui-list-info">
+							<span class="hui-icons hui-icons-right"></span>
+						</div>
+					</div>
+				</a>
+				<a href="javascript:hui.toast('Hello Hcoder UI !');">
+					<div class="hui-list-text">
+						账户余额 : 1000元 | 积分 : 2000
+					</div>
+				</a>
+			</div>
+			<div class="hui-list" style="background:#FFFFFF; margin-top:28px;">
+				<ul>
+					<li>
+						<a href="javascript:to_camare()">
+							<div class="hui-list-icons">
+								<img src="../img/list/sc.png" />
+							</div>
+							<div class="hui-list-text">
+								我的拍照
+								<div class="hui-list-info">
+									<span class="hui-icons hui-icons-right"></span>
+								</div>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:to_application();">
+							<div class="hui-list-icons">
+								<img src="../img/list/ht.png" />
+							</div>
+							<div class="hui-list-text">
+								我的应用
+								<div class="hui-list-info">
+									<span class="hui-icons hui-icons-right"></span>
+								</div>
+							</div>
+						</a>
+					</li>
+						<li>
+						<a href="javascript:to_huitouchpwd();">
+							<div class="hui-list-icons">
+								<img src="../img/list/suo.png" />
+							</div>
+							<div class="hui-list-text">
+								手势解锁
+								<div class="hui-list-info">
+									<span class="hui-icons hui-icons-right"></span>
+								</div>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);">
+							<div class="hui-list-icons">
+								<img src="../img/list/order.png" />
+							</div>
+							<div class="hui-list-text">
+								我的订单
+								<div class="hui-list-info">
+									<span class="hui-icons hui-icons-right"></span>
+								</div>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);">
+							<div class="hui-list-icons">
+								<img src="../img/list/lishi.png" />
+							</div>
+							<div class="hui-list-text">
+								历史足迹
+								<div class="hui-list-info">
+									<span class="hui-icons hui-icons-right"></span>
+								</div>
+							</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div style="background:#FFFFFF; margin-top:28px;">
+				<button type="button" class="hui-button hui-button-large" onclick="logo_out()">
+            <span class="hui-icons hui-icons-logoff"></span>退出系统
+           </button>
+			</div>
+		</div>
+		<!--侧滑-->
+		<!--<div class="hui-slide-menu">
+			<ul>
+				<li>菜单1</li>
+				<li>菜单2</li>
+				<li>菜单3</li>
+				<li>菜单4</li>
+				<li style="padding-top:30px;">
+					<button type="button" class="hui-button hui-button-large" onclick="hui.closeSlideMenu();">关闭菜单</button>
+				</li>
+			</ul>
+		</div>-->
+		<script type="text/javascript" src="../libs/hui_ku/js/hui.js"></script>
+		<script type="text/javascript" src="../libs/jquery/jquery-2.1.0.js"></script>
+		<script type="text/javascript" src="../libs/crypto/crypto-js.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script type="text/javascript" src="../js/self_comment.js"></script>
+		<script type="text/javascript">
+			//禁用返回键
+			//			hui.slideMenu();
+			hui.Back = null;
+			var data = {
+				"id": localStorage.getItem('id')
+			}
+
+			function to_camare() {
+				self_comment.to_camare(1)
+			}
+
+			function to_application() {
+				self_comment.to_application(1)
+			}
+			function to_huitouchpwd() {
+				self_comment.to_huitouchpwd(1)
+			}
+
+			function logo_out() {
+				axios.post('/app_dealer/login_after/account/logout', data)
+					.then(function(response) {
+						var data_msg = response.data
+						if(data_msg.code == 200) {
+							localStorage.clear();
+							hui.close('./index.html')
+						}
+					})
+					.catch(function(error) {
+						hui.iconToast(error, 'warn');
+					})
+
+			}
+			hui.plusReady(function() {
+				var indexView = hui.getView('../index.html');
+				var _self = plus.webview.currentWebview();
+			})
+		</script>
+	</body>
+
+</html>

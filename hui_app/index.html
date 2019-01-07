@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+		<link type="text/css" rel="stylesheet" href="./libs/hui_ku/css/hui.css" />
+		<style type="text/css">
+
+		</style>
+	</head>
+
+	<body>
+
+		<div id="hui-footer">
+			<a href="javascript:changeSubView(0)" id="nav-home">
+				<div class="hui-footer-icons hui-icons-home"></div>
+				<div class="hui-footer-text">首页</div>
+			</a>
+			<a href="javascript:changeSubView(1);" id="nav-news">
+				<div class="hui-footer-icons hui-icons-news"></div>
+				<div class="hui-footer-text">订单</div>
+			</a>
+			<div style="width:20%; text-align:center;" class="hui-fl">
+				<img src="img/logo_1.png" height="44" />
+			</div>
+			<a href="javascript:changeSubView(2);" id="nav-forum">
+				<div class="hui-footer-icons hui-icons-forum"></div>
+				<div class="hui-footer-text">代理商</div>
+			</a>
+			<a href="javascript:changeSubView(3);" id="nav-my">
+				<div class="hui-footer-icons hui-icons-my"></div>
+				<div class="hui-footer-text">我的</div>
+			</a>
+		</div>
+
+		<script type="text/javascript" src="./libs/hui_ku/js/hui.js"></script>
+		<script type="text/javascript">
+			// 创建子窗口
+			hui.Back = null;
+			var subpages = new Array(
+				new Array('./page/sub_home.html', {
+					top: '0px',
+					bottom: "55px",
+					left: "0"
+				}),
+				new Array('./page/sub_news.html', {
+					top: '0px',
+					bottom: "55px",
+					left: "100%"
+				}),
+				new Array('./page/sub_forum.html', {
+					top: '0px',
+					bottom: "55px",
+					left: "200%"
+				}),
+				new Array('./page/sub_my.html', {
+					top: '0px',
+					bottom: "55px",
+					left: "300%"
+				}, {
+					name: 'hcoder',
+					age: 18
+				})
+			);
+			hui.plusReady(function() {
+				hui.subpages(subpages);
+				/*监听安卓物理键 start*/
+				var backButtonPress = 0;
+				plus.key.addEventListener("backbutton", function() {
+					backButtonPress++;
+					if(backButtonPress > 1) {
+						localStorage.clear()
+						plus.runtime.quit();
+					} else {
+						plus.nativeUI.toast('再按一次退出应用');
+					}
+					setTimeout(function() {
+						backButtonPress = 0;
+					}, 1000);
+					return false;
+
+				});
+
+				/*监听安卓物理键 end*/
+
+			});
+			//点击底部按钮切换窗口
+			function changeSubView(index) {
+				for(var i = 0; i < subpages.length; i++) {
+					var subpage = hui.getView(subpages[i][0]);
+					subpage.setStyle({
+						'left': ((index - i) * 100) + '%'
+					});
+				}
+				//选项状态激活
+				hui('#hui-footer a').removeClass('hui-footer-active');
+				hui('#hui-footer a').eq(index).addClass('hui-footer-active');
+			}
+		</script>
+
+		<body>
+
+</html>

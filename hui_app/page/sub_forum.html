@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>HUI</title>
+		<link type="text/css" rel="stylesheet" href="../libs/hui_ku/css/hui.css" />
+
+		<style>
+			#hui-index-list-bar {
+				width: 25px;
+				height: 100%;
+				position: fixed;
+				z-index: 2;
+				top: 46px;
+				right: 0px;
+				background: #E4E4E4;
+				padding-top: 8px;
+			}
+			
+			#hui-index-list-bar a {
+				display: block;
+				width: 100%;
+				height: 3.5%;
+				line-height: 3.5%;
+				text-align: center;
+				font-size: 13px;
+				color: #A3A3A3;
+			}
+			
+			.hui-index-list-title {
+				height: 44px;
+				background: #F8F8F8;
+				line-height: 44px;
+				padding: 0px 10px;
+				border-bottom: 1px solid #E4E3E6;
+			}
+			
+			.self_top {
+				height: 46px;
+				width: 100%;
+			}
+			
+			#hui-index-list-search {
+				width: 100%;
+				height: 26px;
+				border-bottom: 1px solid #E4E3E6;
+				position: fixed;
+				top: 44px;
+				left: 0px;
+				background: #FFFFFF;
+				z-index: 1;
+				padding: 10px 0px;
+			}
+			
+			#hui-index-list-search input {
+				width: 100%;
+				padding: 0px 44px;
+				height: 26px;
+				line-height: 26px;
+				border: 0px;
+				box-sizing: border-box;
+				-webkit-box-sizing: border-box;
+				-moz-box-sizing: border-box;
+				-o-box-sizing: border-box;
+				webkit-appearance: none;
+				-moz-appearance: none;
+				appearance: none;
+			}
+			
+			#hui-index-list-search:before {
+				content: '\e714';
+				width: 44px;
+				height: 44px;
+				line-height: 44px;
+				text-align: center;
+				display: block;
+				position: absolute;
+				left: 0px;
+				top: 0px;
+				font-family: "hui-font";
+				font-size: 16px;
+			}
+			
+			#add_lu {
+				font-size: 40px;
+				margin-right: 20px;
+			}
+			
+			.zhanwei_fu {
+				height: 660px;
+				width: 100%;
+				background: white;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<header class="hui-header">
+			<h1>代理商</h1>
+			<a href="javascript:selectTodo_add('添加代理商');" id="add_lu">+</a>
+		</header>
+		<div class="hui-wrap">
+			<div id="hui-index-list-search">
+				<input type="text" name="seach" id="hui-index-list-search-input" value="" placeholder="请输入关键字进行搜索" />
+			</div>
+			<!-- 列表数据 循环  hui-index-list-title 和 hui-list -->
+			<div class="self_top">
+
+			</div>
+			<div id="self_user_c">
+				<div id='self_hui_A' style="display: none;">
+					<div class="hui-index-list-title" id="hui-index-list-title_A">A</div>
+					<div class="hui-list" id="self_hui_list_A">
+					</div>
+				</div>
+				<div id='self_hui_B' style="display: none;">
+					<div class="hui-index-list-title" id="hui-index-list-title_B">B</div>
+					<div class="hui-list" id="self_hui_list_B">
+					</div>
+				</div>
+
+				<div id='self_hui_C' style="display: none;">
+					<div class="hui-index-list-title" id="hui-index-list-title_C">C</div>
+					<div class="hui-list" id="self_hui_list_C">
+					</div>
+				</div>
+
+				<div id='self_hui_D' style="display: none;">
+					<div class="hui-index-list-title" id="hui-index-list-title_A">D</div>
+					<div class="hui-list" id="self_hui_list_D">
+					</div>
+				</div>
+				<div id='self_hui_E' style="display: none;">
+					<div class="hui-index-list-title" id="hui-index-list-title_E">E</div>
+					<div class="hui-list" id="self_hui_list_E">
+					</div>
+				</div>
+				<div id='self_hui_F' style="display: none;">
+					<div class="hui-index-list-title" id="hui-index-list-title_F">F</div>
+					<div class="hui-list" id="self_hui_list_F">
+					</div>
+				</div>
+				<div id='self_hui_G' style="display: none;">
+					<div class="hui-index-list-title" id="hui-index-list-title_G">G</div>
+					<div class="hui-list" id="self_hui_list_G">
+					</div>
+				</div>
+				<div id='self_hui_H' style="display: none;">
+					<div class="hui-index-list-title" id="hui-index-list-title_H">H</div>
+					<div class="hui-list" id="self_hui_list_H">
+					</div>
+				</div>
+				<div id='self_hui_I' style="display: none;">
+					<div class="hui-index-list-title" id="hui-index-list-title_I">I</div>
+					<div class="hui-list" id="self_hui_list_I">
+					</div>
+				</div>
+				<div id='self_hui_J' style="display: none;">
+					<div class="hui-index-list-title" id="hui-index-list-title_J">J</div>
+					<div class="hui-list" id="self_hui_list_J">
+					</div>
+				</div>
+				<div id='self_hui_K' style="display: none;">
+					<div class="hui-index-list-title" id="hui-index-list-title_K">K</div>
+					<div class="hui-list" id="self_hui_list_K">
+					</div>
+				</div>
+				<div id='self_hui_L' style="display: none;">
+					<div class="hui-index-list-title" id="hui-index-list-title_L">L</div>
+					<div class="hui-list" id="self_hui_list_L">
+					</div>
+				</div>
+				<div id='self_hui_M' style="display: none;">
+					<div class="hui-index-list-title" id="hui-index-list-title_M">M</div>
+					<div class="hui-list" id="self_hui_list_M">
+					</div>
+				</div>
+				<div id='self_hui_N' style="display: none;">
+					<div class="hui-index-list-title" id="hui-index-list-title_N">N</div>
+					<div class="hui-list" id="self_hui_list_N">
+					</div>
+				</div>
+				<div id='self_hui_O' style="display: none;">
+					<div class="hui-index-list-title" id="hui-index-list-title_O">O</div>
+					<div class="hui-list" id="self_hui_list_O">
+					</div>
+				</div>
+				<div id='self_hui_P' style="display: none;">
+					<div class="hui-index-list-title" id="hui-index-list-title_P">P</div>
+					<div class="hui-list" id="self_hui_list_P">
+					</div>
+				</div>
+				<div id='self_hui_Q' style="display: none;">
+					<div class="hui-index-list-title" id="hui-index-list-title_Q">Q</div>
+					<div class="hui-list" id="self_hui_list_Q">
+					</div>
+				</div>
+
+				<div id='self_hui_R' style="display: none;">
+					<div class="hui-index-list-title" id="hui-index-list-title_R">R</div>
+					<div class="hui-list" id="self_hui_list_R">
+					</div>
+				</div>
+
+				<div id='self_hui_S' style="display: none;">
+					<div class="hui-index-list-title" id="hui-index-list-title_S">S</div>
+					<div class="hui-list" id="self_hui_list_S">
+					</div>
+				</div>
+				<div id='self_hui_T' style="display: none;">
+					<div class="hui-index-list-title" id="hui-index-list-title_T">T</div>
+					<div class="hui-list" id="self_hui_list_T">
+					</div>
+				</div>
+				<div id='self_hui_U' style="display: none;">
+					<div class="hui-index-list-title" id="hui-index-list-title_U">U</div>
+					<div class="hui-list" id="self_hui_list_U">
+					</div>
+				</div>
+				<div id='self_hui_V' style="display: none;">
+					<div class="hui-index-list-title" id="hui-index-list-title_V">V</div>
+					<div class="hui-list" id="self_hui_list_V">
+					</div>
+				</div>
+				<div id='self_hui_W' style="display: none;">
+					<div class="hui-index-list-title" id="hui-index-list-title_V">W</div>
+					<div class="hui-list" id="self_hui_list_W">
+					</div>
+				</div>
+				<div id='self_hui_X' style="display: none;">
+					<div class="hui-index-list-title" id="hui-index-list-title_V">X</div>
+					<div class="hui-list" id="self_hui_list_X">
+					</div>
+				</div>
+				<div id='self_hui_Y' style="display: none;">
+					<div class="hui-index-list-title" id="hui-index-list-title_Y">Y</div>
+					<div class="hui-list" id="self_hui_list_Y">
+					</div>
+				</div>
+				<div id='self_hui_Z' style="display: none;">
+					<div class="hui-index-list-title" id="hui-index-list-title_Z">Z</div>
+					<div class="hui-list" id="self_hui_list_Z">
+					</div>
+				</div>
+
+			</div>
+			<div class="zhanwei_fu" style="display: none;">
+				下拉刷新
+			</div>
+		</div>
+
+		<div id="hui-index-list-bar">
+			<a>A</a>
+			<a>B</a>
+			<a>C</a>
+			<a>D</a>
+			<a>E</a>
+			<a>F</a>
+			<a>G</a>
+			<a>H</a>
+			<a>I</a>
+			<a>J</a>
+			<a>K</a>
+			<a>L</a>
+			<a>M</a>
+			<a>N</a>
+			<a>O</a>
+			<a>P</a>
+			<a>Q</a>
+			<a>R</a>
+			<a>S</a>
+			<a>T</a>
+			<a>U</a>
+			<a>V</a>
+			<a>W</a>
+			<a>X</a>
+			<a>Y</a>
+			<a>Z</a>
+		</div>
+		<div id="scroll" style="display:none;"></div>
+		<script type="text/javascript" src="../libs/hui_ku/js/hui.js"></script>
+		<script type="text/javascript" src="../libs/jquery/jquery-2.1.0.js"></script>
+		<script type="text/javascript" src="../libs/crypto/crypto-js.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script type="text/javascript" src="../js/self_comment.js"></script>
+		<script type="text/javascript" src="../libs/pinyin/pinyinjs-master/dict/pinyin_dict_firstletter.js"></script>
+		<script type="text/javascript" src="../libs/pinyin/pinyinjs-master/pinyinUtil.js"></script>
+		<script type="text/javascript">
+			//禁用返回键
+			hui.Back = null;
+			/*假数据*/
+			var data = {
+				"account": localStorage.getItem('account')
+			}
+			/*获取所有经销商信息 start*/
+			axios.post('/app_sale_manager/login_after/dealer/all', data)
+				.then(function(response) {
+					var data_msg = response.data
+					var user = data_msg.data
+					var z_arr = []
+					var user_html = ''
+					for(var i = 0; i < user.length; i++) {
+						user[i].name = pinyinUtil.getFirstLetter(user[i].account, true)[0].substr(0, 1).toUpperCase()
+						if(z_arr.indexOf(user[i].name) == -1) {
+							z_arr.push(user[i].name)
+						}
+
+					}
+					z_arr.forEach(function(e, index) {
+						hui('#self_hui_' + e).show()
+					})
+					for(var b = 0; b < user.length; b++) {
+						var li = document.createElement('li');
+						li.innerHTML = '<a href="javascript:selectTodo(' + user[b].id + ');">' +
+							'<div class="hui-list-text">' + user[b].account + '</div>' +
+							'</a>';
+						hui(li).appendTo('#self_hui_list_' + user[b].name)
+					}
+					//					console.log('所有经销商'+JSON.stringify(data_msg))
+				})
+				.catch(function(error) {
+					hui.iconToast(error, 'warn');
+				})
+			/*获取所有经销商信息 end*/	
+			//数组去重
+			function unique(array) {
+				return array.concat().sort().filter(function(item, index, array) {
+					return !index || item !== array[index - 1]
+				})
+			}
+			/*
+			 * 说明:
+			 * 城市例子展示到了 D，真实项目开发按照结构完成部署即可
+			 * 请按照以下js实现 indexList
+			 */
+			//1、右侧字母序号点击事件绑定
+			hui('#hui-index-list-bar').find('a').click(function() {
+				skipToIndex(this.innerHTML);
+			});
+			//2、跳转到指定字母开头处函数定义
+			function skipToIndex(index) {
+				var listTitle = hui('#hui-index-list-title_' + index);
+				if(listTitle.length < 1) {
+					hui.toast('没有对应的数据，演示数据到D');
+					return;
+				}
+				var sets = listTitle.offset();
+				//减掉46是头部导航的高度 根据实际需求设置
+				hui.scrollTop(sets.top - 90);
+			}
+
+			function selectTodo(url) {
+				hui.open('./get_user.html', {}, true, {
+					order_code: url
+				})
+			}
+
+			function selectTodo_add(url) {
+				hui.open('./add_user.html', {}, true, {
+					order_code: url
+				})
+			}
+			//4、搜索
+			var sreachInput = document.getElementById('hui-index-list-search-input');
+			sreachInput.addEventListener('keyup', function() {
+				var k = this.value;
+				if(k.length < 1) {
+					return false;
+				}
+				var lists = hui('.hui-list-text');
+				for(var i = 0; i < lists.length; i++) {
+					var _sobj = lists.dom[i];
+					if(_sobj.innerHTML.indexOf(k) != -1) {
+						var sets = hui.offset(_sobj);
+						setTimeout(function() {
+							hui.scrollTop(sets.top - 90 - hui.immersedStatusbarHeight);
+						}, 300);
+						break;
+					}
+				}
+			});
+
+			hui.plusReady(function() {
+				hui('#hui-index-list-search').css({
+					top: 44 + hui.immersedStatusbarHeight + 'px'
+				});
+				hui('#hui-index-list-bar').css({
+					top: 44 + hui.immersedStatusbarHeight + 'px'
+				});
+				//1、右侧字母序号点击事件绑定
+				hui('#hui-index-list-bar').find('a').click(function() {
+					skipToIndex(this.innerHTML);
+				});
+				//索引
+
+				var indexView = hui.getView('../index.html');
+
+			});
+		</script>
+
+	</body>
+
+</html>

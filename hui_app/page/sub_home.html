@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>HUI</title>
+		<link type="text/css" rel="stylesheet" href="../libs/hui_ku/css/hui.css" />
+		<style type="text/css">
+			#tianqi {
+				width: 100%;
+				height: 250px;
+				background: pink;
+			}
+			#tianqi_1{
+				width: 100%;
+				height: 30px;
+				line-height: 30px;
+				background: white;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="hui-wrap">
+
+			<div id="tianqi">
+				<img src="../img/list/back.jpg" />
+			</div>
+			<div id="tianqi_1">
+			</div>
+			
+			<div style="padding:10px;">
+				<div class="hui-speed-dial">
+					<ul></ul>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../libs/hui_ku/js/hui.js"></script>
+		<script type="text/javascript" src="../libs/jquery/jquery-2.1.0.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script type="text/javascript" src="../js/self_comment.js"></script>
+		<script type="text/javascript">
+			//禁用返回键
+			hui.Back = null;
+			var icons = ['hui-icons-menu', 'hui-icons-toast', "hui-icons-menu", "hui-icons-img",
+				"hui-icons-left", "hui-icons-number", "hui-icons-up", "hui-icons-down",
+				"hui-icons-down2", "hui-icons-progress", "hui-icons-success", "hui-icons-range",
+				"hui-icons-warn", "hui-icons-tab", "hui-icons-loading", "hui-icons-picker",
+
+			];
+			var html = '';
+			for(var i = 0; i < icons.length; i++) {
+				html += '<li onclick=self_comment.to_add_order("' + icons[i] + '")>' +
+					'<div class="hui-speed-dial-icons">' +
+					'<span class="hui-icons ' + icons[i] + '"></span>' +
+					'</div>' +
+					'<div class="hui-speed-dial-text">' + icons[i].replace('hui-icons-', '') + '</div>';
+				'</li>';
+				hui('.hui-speed-dial ul').html(html);
+			}
+			hui.plusReady(function() {
+				var indexView = hui.getView('../index.html');
+				plus.geolocation.getCurrentPosition(function(p) {
+					hui('#tianqi_1').html('当前设备位于：'+p.address.city)
+				}, function(e) {
+					alert('Geolocation error: ' + e.message);
+				});
+
+			});
+		</script>
+	</body>
+
+</html>
